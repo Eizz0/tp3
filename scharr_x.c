@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     /* Reading */
     for(i=0; i < rows; i++)
       for(j=0; j < cols ; j++)
-          graymap[0][i * cols + j] = pm_getint(ifp);
+          graymapList[0][i * cols + j] = pm_getint(ifp);
 
     /* Writing */
     printf("P2\n");

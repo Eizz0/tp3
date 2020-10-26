@@ -5,21 +5,13 @@
 #######################################
 
 
-PROG = scharr_x_y
+objects = scharr_y.o Util.o
 
-all : $(PROG)
+scharr_y : $(objects)
+	gcc -o scharr_y $(objects) -lm
 
-# Variables for file compilation
-CC        =  gcc
-CFLAGS    =  -g -Wall
-CPPFLAGS  =  -DDEBUG
-LDFLAGS   =  -g -lm
-
-
-scharr_x_y : scharr_x_y.o Util.o
-
+.PHONY : clean
 clean :
-	@rm -f *.o
+	-rm -f *.o
 
-cleanall : clean
-	@rm -f $(PROG)
+

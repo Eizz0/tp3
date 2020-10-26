@@ -8,7 +8,6 @@ int main(int argc, char* argv[])
     {
     FILE* ifp;
 
-    gray* graymap;
     int ich1, ich2, rows, cols, maxval=255;
     int i, j;
 
@@ -43,39 +42,48 @@ int main(int argc, char* argv[])
     maxval = pm_getint( ifp );
 
     /* Memory allocation  */
-    graymap = (gray *) malloc(cols * rows * sizeof(gray));
-
+    int n,k;
+    n=2;
+    gray* graymapList[n];
+    /* Memory allocation  */
+    for(k=0; k<n ;k++)
+    {
+     graymapList[k]= (gray *) malloc(cols * rows * sizeof(gray));
+    }
     /* Reading */
     for(i=0; i < rows; i++)
       for(j=0; j < cols ; j++)
-          graymap[i * cols + j] = pm_getint(ifp);
+          graymapList[0][i * cols + j] = pm_getint(ifp);
 
     /* Writing */
     printf("P2\n");
-
     printf("%d %d \n", cols, rows);
     printf("%d\n",maxval);
 
     for(i=0; i < rows; i++){
       for(j=0; j < cols ; j++){
         if( i-1 == (-1)){
-              printf("%d ", abs((graymap[i * cols + j]*0 + graymap[i * cols + j + 1]*0 + graymap[i * cols + j - 1]*0  + graymap[(i+1) * cols + j]*10 + graymap[(i+1) * cols + j + 1]*3+ graymap[(i+1) * cols + j - 1]*3 )/16 ));
+              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j + 1]*0 + graymapList[0][i * cols + j - 1]*0  + graymapList[0][(i+1) * cols + j]*10 + graymapList[0][(i+1) * cols + j + 1]*3+ graymapList[0][(i+1) * cols + j - 1]*3 )/16;
             }
-            else if( j-1 == (-1) ){
-              printf("%d ", abs((graymap[i * cols + j]*0 + graymap[i * cols + j + 1]*0 + graymap[(i-1) * cols + j]*(-10) + graymap[(i+1) * cols + j]*10  + graymap[(i-1) * cols + j + 1]*(-3) +  graymap[(i+1) * cols + j + 1]*3 )/16));
+            else if( j-1 == (-1) ){           
+              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j + 1]*0 + graymapList[0][(i-1) * cols + j]*(-10) + graymapList[0][(i+1) * cols + j]*10  + graymapList[0][(i-1) * cols + j + 1]*(-3) +  graymapList[0][(i+1) * cols + j + 1]*3 )/16;
             }
-            else if ( i+1 == rows ){
-              printf("%d ", abs((graymap[i * cols + j]*0 + graymap[i * cols + j + 1]*0 +graymap[i * cols + j - 1]*0 + graymap[(i-1) * cols + j]*(-10)+ graymap[(i-1) * cols + j - 1]*(-3) + graymap[(i-1) * cols + j + 1]*(-3) )/16 ));
+            else if ( i+1 == rows )
+            {
+              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j + 1]*0 +graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10)+ graymapList[0][(i-1) * cols + j - 1]*(-3) + graymapList[0][(i-1) * cols + j + 1]*(-3) )/16 ;
             }
             else if( j+1 == cols){
-              printf("%d ", abs((graymap[i * cols + j]*0 + graymap[i * cols + j - 1]*0 + graymap[(i-1) * cols + j]*(-10) + graymap[(i+1) * cols + j]*10 + graymap[(i-1) * cols + j - 1]*(-3)+ graymap[(i+1) * cols + j - 1]*3 )/16 ));
+              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10) + graymapList[0][(i+1) * cols + j]*10 + graymapList[0][(i-1) * cols + j - 1]*(-3)+ graymapList[0][(i+1) * cols + j - 1]*3 )/16);
             }
-            else{
-              printf("%d ", abs((graymap[i * cols + j]*0 + graymap[i * cols + j + 1]*0 +graymap[i * cols + j - 1]*0 + graymap[(i-1) * cols + j]*(-10) + graymap[(i+1) * cols + j]*10 + graymap[(i-1) * cols + j - 1]*(-3) + graymap[(i-1) * cols + j + 1]*(-3) +  graymap[(i+1) * cols + j + 1]*3+ graymap[(i+1) * cols + j - 1]*3 )/16 ));
+            else {
+              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j + 1]*0 +graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10) + graymapList[0][(i+1) * cols + j]*10 + graymapList[0][(i-1) * cols + j - 1]*(-3) + graymapList[0][(i-1) * cols + j + 1]*(-3) +  graymapList[0][(i+1) * cols + j + 1]*3+ graymapList[0][(i+1) * cols + j - 1]*3 )/16 ;
           }
         }
       }
-
+            for(i=0; i < rows; i++){
+              for(j=0; j < cols ; j++)
+                printf("%d ", graymapList[1][i * cols + j]);
+                }
 
 
       /* Closing */
