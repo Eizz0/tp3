@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
               graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j + 1]*0 +graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10)+ graymapList[0][(i-1) * cols + j - 1]*(-3) + graymapList[0][(i-1) * cols + j + 1]*(-3) )/16 ;
             }
             else if( j+1 == cols){
-              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10) + graymapList[0][(i+1) * cols + j]*10 + graymapList[0][(i-1) * cols + j - 1]*(-3)+ graymapList[0][(i+1) * cols + j - 1]*3 )/16);
+              graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10) + graymapList[0][(i+1) * cols + j]*10 + graymapList[0][(i-1) * cols + j - 1]*(-3)+ graymapList[0][(i+1) * cols + j - 1]*3 )/16;
             }
             else {
               graymapList[1][i * cols + j]= (graymapList[0][i * cols + j]*0 + graymapList[0][i * cols + j + 1]*0 +graymapList[0][i * cols + j - 1]*0 + graymapList[0][(i-1) * cols + j]*(-10) + graymapList[0][(i+1) * cols + j]*10 + graymapList[0][(i-1) * cols + j - 1]*(-3) + graymapList[0][(i-1) * cols + j + 1]*(-3) +  graymapList[0][(i+1) * cols + j + 1]*3+ graymapList[0][(i+1) * cols + j - 1]*3 )/16 ;
