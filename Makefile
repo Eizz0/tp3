@@ -5,10 +5,10 @@
 #######################################
 
 
-objects = scharr_x.o Util.o
+objects = scharr_x_test.o Util.o
 
-scharr_x : $(objects)
-	gcc -o scharr_x $(objects) -lm
+scharr_x_test : $(objects)
+	gcc -o scharr_x_test $(objects) -lm
 
 .PHONY : clean
 clean :
